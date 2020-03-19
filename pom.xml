@@ -15,6 +15,7 @@
 		<tomcat.version>7.0.100</tomcat.version>
 		<ciel.dictionary.openmrs.version>1.9.9</ciel.dictionary.openmrs.version>
 		<ciel.dictionary.version>20171118</ciel.dictionary.version>
+		<openmrs.version>2.3.0</openmrs.version>
 	</properties>
 
 	<dependencies>
@@ -138,8 +139,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<fork>true</fork>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			
@@ -176,9 +177,10 @@
 						<configuration>
 							<driver>com.mysql.jdbc.Driver</driver>
 							<changeLogFile>liquibase-schema-only.xml</changeLogFile>
-							<url><![CDATA[jdbc:mysql:mxj://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/emptydatabase&server.datadir=${project.build.directory}/emptydatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
+							<url><![CDATA[jdbc:mysql://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/emptydatabase&server.datadir=${project.build.directory}/emptydatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
+							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -202,9 +204,11 @@
 						<configuration>
 							<driver>com.mysql.jdbc.Driver</driver>
 							<changeLogFile>liquibase-core-data.xml</changeLogFile>
-							<url><![CDATA[jdbc:mysql:mxj://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/emptydatabase&server.datadir=${project.build.directory}/emptydatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
+							<url><![CDATA[jdbc:mysql://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/emptydatabase&server.datadir=${project.build.directory}/emptydatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
+							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+							
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -228,9 +232,9 @@
 						<configuration>
 							<driver>com.mysql.jdbc.Driver</driver>
 							<changeLogFile>${project.build.directory}/liquibase/${liquibasecielDataFileName}</changeLogFile>
-							<url><![CDATA[jdbc:mysql:mxj://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/emptydatabase&server.datadir=${project.build.directory}/emptydatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
-							<username>openmrs</username>
-							<password>test</password>
+							<url><![CDATA[jdbc:mysql://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/emptydatabase&server.datadir=${project.build.directory}/emptydatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
+							<username>${env.MYSQL_USER}</username>
+							<password>${env.MYSQL_PASSWORD}</password>
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -254,9 +258,11 @@
 						<configuration>
 							<driver>com.mysql.jdbc.Driver</driver>
 							<changeLogFile>liquibase-update-to-latest.xml</changeLogFile>
-							<url><![CDATA[jdbc:mysql:mxj://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/emptydatabase&server.datadir=${project.build.directory}/emptydatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
+							<url><![CDATA[jdbc:mysql://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/emptydatabase&server.datadir=${project.build.directory}/emptydatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
+							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+							
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -281,9 +287,11 @@
 						<configuration>
 							<driver>com.mysql.jdbc.Driver</driver>
 							<changeLogFile>${liquibaseEmptyDbFollowupFileName}</changeLogFile>
-							<url><![CDATA[jdbc:mysql:mxj://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/emptydatabase&server.datadir=${project.build.directory}/emptydatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
+							<url><![CDATA[jdbc:mysql://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/emptydatabase&server.datadir=${project.build.directory}/emptydatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
+							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+							
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -301,16 +309,18 @@
 							<goal>update</goal>
 						</goals>
 					</execution>
-
+					<!-- 
 					<execution>
 						<id>demo-db-add-data</id>
 						<phase>generate-resources</phase>
 						<configuration>
 							<driver>com.mysql.jdbc.Driver</driver>
 							<changeLogFile>${liquibaseDemoDataFileName}</changeLogFile>
-							<url><![CDATA[jdbc:mysql:mxj://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/demodatabase&server.datadir=${project.build.directory}/demodatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
+							<url><![CDATA[jdbc:mysql://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/demodatabase&server.datadir=${project.build.directory}/demodatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
+							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+							
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -334,9 +344,11 @@
 						<configuration>
 							<driver>com.mysql.jdbc.Driver</driver>
 							<changeLogFile>liquibase-update-to-latest.xml</changeLogFile>
-							<url><![CDATA[jdbc:mysql:mxj://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/demodatabase&server.datadir=${project.build.directory}/demodatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
+							<url><![CDATA[jdbc:mysql://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/demodatabase&server.datadir=${project.build.directory}/demodatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
+							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+							
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -360,9 +372,11 @@
 						<configuration>
 							<driver>com.mysql.jdbc.Driver</driver>
 							<changeLogFile>${liquibaseDemoDataFollowupFileName}</changeLogFile>
-							<url><![CDATA[jdbc:mysql:mxj://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/demodatabase&server.datadir=${project.build.directory}/demodatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
+							<url><![CDATA[jdbc:mysql://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/demodatabase&server.datadir=${project.build.directory}/demodatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
+							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+							
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -380,6 +394,7 @@
 							<goal>update</goal>
 						</goals>
 					</execution>
+					 -->
 				</executions>
 			</plugin>
 
@@ -408,7 +423,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.8</version>
 				<executions>
 					<execution>
 						<id>fetch-war</id>

@@ -13,10 +13,6 @@
  */
 package org.openmrs.standalone;
 
-import java.io.File;
-
-import com.mysql.management.driverlaunched.ServerLauncherSocketFactory;
-
 /**
  * It is used to stop embedded database.
  */
@@ -27,8 +23,8 @@ public class StopEmbeddedMySQL {
 			throw new IllegalArgumentException("Must be called with at least one argument pointing to a database directory!");
 		}
 		
-		for (int i = 0; i < args.length; i++) {
-			ServerLauncherSocketFactory.shutdown(new File(args[i]), null);
-        }
+//		for (int i = 0; i < args.length; i++) {
+//			ServerLauncherSocketFactory.shutdown(new File(args[i]), null);
+//        }
 	}
 }

@@ -227,12 +227,12 @@ public class ApplicationController {
 		userInterface.setVisible(true);
 		
 		// add shutdown hook to stop server
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-			
-			public void run() {
-				stopServer();
-			}
-		});
+//		Runtime.getRuntime().addShutdownHook(new Thread() {
+//			
+//			public void run() {
+//				stopServer();
+//			}
+//		});
 		
 		while (needsInitialConfiguration() && applyDatabaseChange == null) {
 			System.out.println("Initial configuration needed");
@@ -242,17 +242,17 @@ public class ApplicationController {
 		if (applyDatabaseChange != null) {
 			if (applyDatabaseChange == DatabaseMode.USE_INITIALIZATION_WIZARD) {
 				deleteActiveDatabase();
-				StandaloneUtil.resetConnectionPassword();
+//				StandaloneUtil.resetConnectionPassword();
 				StandaloneUtil.startupDatabaseToCreateDefaultUser();
 			} else if (applyDatabaseChange == DatabaseMode.EMPTY_DATABASE) {
 				deleteActiveDatabase();
 				unzipDatabase(new File("emptydatabase.zip"));
-				StandaloneUtil.resetConnectionPassword();
+//				StandaloneUtil.resetConnectionPassword();
 				StandaloneUtil.startupDatabaseToCreateDefaultUser();
 			} else if (applyDatabaseChange == DatabaseMode.DEMO_DATABASE) {
 				deleteActiveDatabase();
 				unzipDatabase(new File("demodatabase.zip"));
-				StandaloneUtil.resetConnectionPassword();
+//				StandaloneUtil.resetConnectionPassword();
 				StandaloneUtil.startupDatabaseToCreateDefaultUser();
 			}
 			

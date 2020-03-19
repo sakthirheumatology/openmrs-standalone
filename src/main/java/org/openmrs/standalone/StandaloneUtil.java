@@ -13,6 +13,7 @@
  */
 package org.openmrs.standalone;
 
+import org.openmrs.standalone.OpenmrsUtil;
 import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -36,8 +37,6 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.mysql.management.driverlaunched.ServerLauncherSocketFactory;
 
 /**
  * Utility routines used by the standalone application.
@@ -337,7 +336,7 @@ public class StandaloneUtil {
 	
 	public static void stopMySqlServer() {
 		try {
-			ServerLauncherSocketFactory.shutdown(new File("database"), new File("database/data"));
+//			ServerLauncherSocketFactory.shutdown(new File("database"), new File("database/data"));
 		}
 		catch (Exception exception) {
 			System.out.println("Cannot Stop MySQL" + exception.getMessage());
@@ -418,8 +417,11 @@ public class StandaloneUtil {
     		throw new RuntimeException("connection.url in runtime properties must contain server.initialize-user=true");
 
 		System.out.println("Working directory is " + new File(".").getAbsolutePath());
-		System.out.println("Opening MySQL connection to create openmrs/test users");
-    	Connection conn = DriverManager.getConnection(url, "openmrs", "test");
+		String mySqlUser = props.getProperty("connection.username");
+		String mysqlPwd = props.getProperty("connection.password");
+		System.out.println("Opening MySQL connection to create "+mySqlUser+"/"+mysqlPwd+" users");
+		
+    	Connection conn = DriverManager.getConnection(url, mySqlUser, mysqlPwd);
     	conn.close();
     	System.out.println("closed MySQL connection");
     	stopMySqlServer();
@@ -451,7 +453,7 @@ public class StandaloneUtil {
 			String regex = ":[0-9]+/";
 			Pattern pattern = Pattern.compile(regex);
 			Matcher matcher = pattern.matcher(connectionString);
-			
+			System.out.println("MySQL port number: "+mySqlPort);
 			//Check if we have a mysql port number to set.
 			if (mySqlPort != null) {
 				
@@ -470,6 +472,8 @@ public class StandaloneUtil {
 					mySqlPort = mySqlPort.replace("/", "");
 				}
 			}
+			System.out.println("MySQL port number changed: "+propertiesFileChanged);
+			System.out.println("Tomcat port number changed: "+tomcatPort);
 			
 			//Set the Tomcat port
 			if (tomcatPort != null) {
@@ -478,6 +482,8 @@ public class StandaloneUtil {
 					propertiesFileChanged = true;
 				}
 			}
+			System.out.println("Tomcat port number changed: "+propertiesFileChanged);
+			
 			
 			//Write back properties file only if changed.
 			if (propertiesFileChanged) {
