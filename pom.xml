@@ -16,6 +16,8 @@
 		<ciel.dictionary.openmrs.version>1.9.9</ciel.dictionary.openmrs.version>
 		<ciel.dictionary.version>20171118</ciel.dictionary.version>
 		<openmrs.version>2.3.0</openmrs.version>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
 	</properties>
 
 	<dependencies>
@@ -57,12 +59,14 @@
 			<version>5.1.28</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-mxj-fixed</artifactId>
 			<version>5.0.12</version>
 			<scope>compile</scope>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-mxj-db-files-fixed</artifactId>
@@ -139,8 +143,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<fork>true</fork>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 			
@@ -180,9 +184,9 @@
 							<url><![CDATA[jdbc:mysql://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/emptydatabase&server.datadir=${project.build.directory}/emptydatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
-							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
+							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
 							<systemProperties>
 								<property>
 									<name>liquibase.databaseChangeLogTableName</name>
@@ -208,7 +212,6 @@
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
 							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-							
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -235,6 +238,7 @@
 							<url><![CDATA[jdbc:mysql://${env.MYSQL_SERVER_HOST}:${env.MYSQL_SERVER_PORT}/${env.MYSQL_MRS_DB}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8&server.initialize-user=true&createDatabaseIfNotExist=true&server.basedir=${project.build.directory}/emptydatabase&server.datadir=${project.build.directory}/emptydatabase/data&server.collation-server=utf8_general_ci&server.character-set-server=utf8&server.max_allowed_packet=32M]]></url>
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
+							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -262,7 +266,6 @@
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
 							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-							
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -291,7 +294,6 @@
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
 							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-							
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -320,7 +322,6 @@
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
 							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-							
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -348,7 +349,6 @@
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
 							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-							
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -376,7 +376,6 @@
 							<username>${env.MYSQL_USER}</username>
 							<password>${env.MYSQL_PASSWORD}</password>
 							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-							
 							<verbose>true</verbose>
 							<dropFirst>false</dropFirst>
 							<systemProperties>
@@ -398,7 +397,7 @@
 				</executions>
 			</plugin>
 
-			<!--
+			<!-- 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
@@ -418,11 +417,12 @@
 					</execution>
 				</executions>
 			</plugin>
-			-->
+			 -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
 				<executions>
 					<execution>
 						<id>fetch-war</id>
@@ -469,6 +469,7 @@
 							</archive>
 						</configuration>
 					</execution>
+					<!-- 
 					<execution>
 						<id>zip-demo-data</id>
 						<phase>package</phase>
@@ -497,6 +498,7 @@
 							</descriptors>
 						</configuration>
 					</execution>
+					 -->
 					<execution>
 						<id>zip-standalone</id>
 						<phase>package</phase>
@@ -661,6 +663,29 @@
 	</build>
 
 	<repositories>
+		<!--
+		https://openmrs.jfrog.io/artifactory/releases
+		<repository>
+			<id>openmrs-repo</id>
+			<name>OpenMRS Nexus Repository</name>
+			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+		</repository>
+		<repository>
+			<id>openmrs-rel-repo</id>
+			<name>OpenMRS REL Repository</name>
+			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>mvn2</id>
+			<name>Maven default repository</name>
+			<url>https://repo1.maven.org/maven2</url>
+		</repository>
+		<repository>
+			<id>nexus</id>
+			<name>Nexus repository</name>
+			<url>http://nexus.motechproject.org/content/repositories/releases</url>
+		</repository>
+		-->
 		<repository>
 			<id>openmrs-repo</id>
 			<name>OpenMRS Nexus Repository</name>
@@ -671,9 +696,34 @@
 			<name>OpenMRS Public Repository</name>
 			<url>https://openmrs.jfrog.io/artifactory/public</url>
 		</repository>
+		
+		
 	</repositories>
 
 	<pluginRepositories>
+		<!--
+		
+		<pluginRepository>
+			<id>openmrs-repo</id>
+			<name>OpenMRS Nexus Repository</name>
+			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>openmrs-rel-repo</id>
+			<name>OpenMRS REL Repository</name>
+			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/releases/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>mvn2</id>
+			<name>Maven default repository</name>
+			<url>https://repo1.maven.org/maven2</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>nexus</id>
+			<name>Nexus repository</name>
+			<url>http://nexus.motechproject.org/content/repositories/releases</url>
+		</pluginRepository>
+		-->
 		<pluginRepository>
 			<id>openmrs-repo</id>
 			<name>OpenMRS Nexus Repository</name>
